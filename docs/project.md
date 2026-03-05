@@ -232,10 +232,10 @@ command or API client.
 ```
 
 **Checkpoint before Phase 4:**
-- [ ] POST to `/api/generate-sql` returns valid JSON with `sql`, `explanation`, `chartType`
-- [ ] Test with a simple question ("show me all customers") — SQL looks correct
-- [ ] Test with an ambiguous question — returns the fallback gracefully
-- [ ] No API keys visible in any client-side code
+- [x] POST to `/api/generate-sql` returns valid JSON with `sql`, `explanation`, `chartType`
+- [x] Test with a simple question ("show me all customers") — SQL looks correct
+- [x] Test with an ambiguous question — returns the fallback gracefully
+- [x] No API keys visible in any client-side code
 
 ---
 
@@ -285,12 +285,12 @@ Use Tailwind only. No external component libraries.
 ```
 
 **Checkpoint before Phase 5:**
-- [ ] UI renders correctly at desktop width
-- [ ] Selecting a schema shows its tables and example question chips
-- [ ] Clicking a chip fills the textarea
-- [ ] Submitting a question shows the SQL + explanation
-- [ ] Loading state works correctly
-- [ ] Error fallback SQL renders as an error (not a code block)
+- [x] UI renders correctly at desktop width
+- [x] Selecting a schema shows its tables and example question chips
+- [x] Clicking a chip fills the textarea
+- [x] Submitting a question shows the SQL + explanation
+- [x] Loading state works correctly
+- [x] Error fallback SQL renders as an error (not a code block)
 
 ---
 
@@ -337,11 +337,11 @@ Do not build the chart yet — that's Phase 6.
 ```
 
 **Checkpoint before Phase 6:**
-- [ ] "Run Query" executes and returns data from Supabase
-- [ ] Results show in the table correctly
-- [ ] Mutation SQL (INSERT/UPDATE/DELETE) is blocked with a clear error
-- [ ] Row count is capped at 100
-- [ ] Empty results show a friendly message
+- [x] "Run Query" executes and returns data from Supabase
+- [x] Results show in the table correctly
+- [x] Mutation SQL (INSERT/UPDATE/DELETE) is blocked with a clear error
+- [x] Row count is capped at 100
+- [x] Empty results show a friendly message
 
 ---
 
@@ -387,12 +387,12 @@ Add automatic chart rendering based on the chartType gemini returned.
 ```
 
 **Checkpoint — Final:**
-- [ ] Bar chart renders for aggregation queries (e.g. "total orders per customer")
-- [ ] Line chart renders for time-series queries (e.g. "signups per week")
-- [ ] Table fallback works for non-visual queries
-- [ ] Chart/Table toggle works
-- [ ] Reset clears all state correctly
-- [ ] Full end-to-end flow works for all 3 schemas
+- [x] Bar chart renders for aggregation queries (e.g. "total orders per customer")
+- [x] Line chart renders for time-series queries (e.g. "signups per week")
+- [x] Table fallback works for non-visual queries
+- [x] Chart/Table toggle works
+- [x] Reset clears all state correctly
+- [x] Full end-to-end flow works for all 3 schemas
 
 ---
 
