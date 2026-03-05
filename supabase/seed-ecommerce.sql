@@ -1,0 +1,2 @@
+-- Seed SQL for the e-commerce schema
+-- Tables: customers, products, orders, order_items

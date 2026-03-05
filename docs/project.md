@@ -130,10 +130,10 @@ Do not build any UI yet. Just scaffold and types.
 ```
 
 **Checkpoint before Phase 2:**
-- [ ] `npm run dev` runs without errors
-- [ ] All folders and empty files exist
-- [ ] `lib/types.ts` has all 4 types with no TypeScript errors
-- [ ] `.env.example` is committed, `.env.local` is in `.gitignore`
+- [x] `npm run dev` runs without errors
+- [x] All folders and empty files exist
+- [x] `lib/types.ts` has all 4 types with no TypeScript errors
+- [x] `.env.example` is committed, `.env.local` is in `.gitignore`
 
 ---
 
