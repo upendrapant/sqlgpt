@@ -21,6 +21,8 @@ export interface SchemaOption {
     name: string;
     description: string;
     tables: TableDefinition[];
+    /** Sample questions users can click to auto-fill the query input */
+    exampleQuestions: string[];
 }
 
 // ─── AI Response Types ───────────────────────────────────────────────────────

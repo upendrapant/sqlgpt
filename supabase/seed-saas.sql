@@ -1,2 +1,0 @@
--- Seed SQL for the SaaS schema
--- Tables: users, subscriptions, invoices, features

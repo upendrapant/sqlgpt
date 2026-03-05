@@ -1,5 +1,5 @@
 # SOP: Text-to-SQL Query Generator
-### Build Guide for Claude (Phase-by-Phase)
+### Build Guide for gemini (Phase-by-Phase)
 
 ---
 
@@ -26,7 +26,7 @@ text-to-sql/
 │   ├── layout.tsx                # Root layout
 │   └── api/
 │       └── generate-sql/
-│           └── route.ts          # API route: Claude call via Vercel AI SDK
+│           └── route.ts          # API route: Gemini call via Vercel AI SDK
 ├── components/
 │   ├── SchemaSelector.tsx        # Dropdown to pick a pre-loaded schema
 │   ├── QueryInput.tsx            # Natural language input + submit button
@@ -48,10 +48,10 @@ text-to-sql/
 
 ## How to Use This SOP
 
-1. Open a **fresh Claude conversation** for each phase
-2. Paste the **Context Block** at the top of every prompt so Claude always knows the full picture
+1. Open a **fresh gemini conversation** for each phase
+2. Paste the **Context Block** at the top of every prompt so gemini always knows the full picture
 3. Then paste the **Phase Prompt** below it
-4. After Claude finishes, do a quick **Checkpoint** before moving to the next phase
+4. After gemini finishes, do a quick **Checkpoint** before moving to the next phase
 5. Never skip a checkpoint — catching issues phase by phase is much faster than debugging at the end
 
 ---
@@ -92,7 +92,7 @@ Rules:
 
 **Goal:** Working Next.js project with all dependencies installed, environment variables configured, and folder structure in place.
 
-**Prompt to give Claude:**
+**Prompt to give Gemini:**
 
 ```
 [PASTE MASTER CONTEXT BLOCK HERE]
@@ -141,7 +141,7 @@ Do not build any UI yet. Just scaffold and types.
 
 **Goal:** Three demo schemas live in Supabase, seeded with realistic dummy data, and a working read-only client in the app.
 
-**Prompt to give Claude:**
+**Prompt to give gemini:**
 
 ```
 [PASTE MASTER CONTEXT BLOCK HERE]
@@ -181,49 +181,49 @@ Create everything needed to set up the Supabase database.
 ```
 
 **Checkpoint before Phase 3:**
-- [ ] Seed SQL runs in Supabase dashboard without errors
-- [ ] All 3 schemas have tables with data visible in Supabase Table Editor
-- [ ] `lib/schemas.ts` exports correctly and TypeScript is happy
-- [ ] `lib/supabase.ts` connects without errors (test with a quick console.log)
+- [x] Seed SQL runs in Supabase dashboard without errors
+- [x] All 3 schemas have tables with data visible in Supabase Table Editor
+- [x] `lib/schemas.ts` exports correctly and TypeScript is happy
+- [x] `lib/supabase.ts` connects without errors (test with a quick console.log)
 
 ---
 
-## Phase 3 — Claude API + Prompt Architecture
+## Phase 3 — gemini API + Prompt Architecture
 
-**Goal:** The API route calls Claude via Vercel AI SDK, returns a validated `SqlResult` object every time, and handles edge cases gracefully.
+**Goal:** The API route calls gemini via Vercel AI SDK, returns a validated `SqlResult` object every time, and handles edge cases gracefully.
 
-**Prompt to give Claude:**
+**Prompt to give gemini:**
 
 ```
 [PASTE MASTER CONTEXT BLOCK HERE]
 
---- PHASE 3: Claude API + Prompt Architecture ---
+--- PHASE 3: gemini API + Prompt Architecture ---
 
 Build the API route that powers the core feature.
 
 1. Create app/api/generate-sql/route.ts:
    - Accepts POST with body: { question: string, schemaId: string }
    - Looks up the matching schema from lib/schemas.ts
-   - Calls Claude using Vercel AI SDK's generateObject()
+   - Calls gemini using Vercel AI SDK's generateObject()
    - Returns a validated SqlResult: { sql, explanation, chartType }
 
 2. The Zod schema for generateObject must enforce:
    - sql: non-empty string
    - explanation: plain English, max 2 sentences
    - chartType: 'bar' | 'line' | 'table'
-     (Claude should choose based on query intent — 
+     (gemini should choose based on query intent — 
       aggregations = bar, trends over time = line, everything else = table)
 
 3. The system prompt must:
    - Include the full schema (all tables, columns, types) dynamically
-   - Instruct Claude to write safe, read-only SQL (SELECT only, no mutations)
+   - Instruct gemini to write safe, read-only SQL (SELECT only, no mutations)
    - Include 2 few-shot examples showing question → sql + explanation + chartType
-   - Tell Claude: if the question is ambiguous or unanswerable with the schema, 
+   - Tell gemini: if the question is ambiguous or unanswerable with the schema, 
      return sql: "-- Cannot generate: [reason]" and explain why in explanation
 
 4. Add basic error handling:
    - If generateObject fails, return a 500 with a clean error message
-   - Validate that schemaId exists before calling Claude
+   - Validate that schemaId exists before calling gemini
 
 5. Export the route handler as named exports (GET not needed, just POST)
 
@@ -243,7 +243,7 @@ command or API client.
 
 **Goal:** A clean, professional-looking UI that showcases the tool clearly to any Upwork client visiting your profile demo.
 
-**Prompt to give Claude:**
+**Prompt to give gemini:**
 
 ```
 [PASTE MASTER CONTEXT BLOCK HERE]
@@ -298,7 +298,7 @@ Use Tailwind only. No external component libraries.
 
 **Goal:** The "Run Query" button executes the generated SQL against Supabase and returns raw results safely.
 
-**Prompt to give Claude:**
+**Prompt to give gemini:**
 
 ```
 [PASTE MASTER CONTEXT BLOCK HERE]
@@ -347,16 +347,16 @@ Do not build the chart yet — that's Phase 6.
 
 ## Phase 6 — Recharts Visualization
 
-**Goal:** Results automatically render as the chart type Claude recommended, making the demo visually impressive.
+**Goal:** Results automatically render as the chart type gemini recommended, making the demo visually impressive.
 
-**Prompt to give Claude:**
+**Prompt to give gemini:**
 
 ```
 [PASTE MASTER CONTEXT BLOCK HERE]
 
 --- PHASE 6: Recharts Visualization ---
 
-Add automatic chart rendering based on the chartType Claude returned.
+Add automatic chart rendering based on the chartType gemini returned.
 
 1. Build components/ResultsChart.tsx:
    - Accepts: columns, rows, chartType ('bar' | 'line' | 'table')
@@ -417,7 +417,7 @@ When describing this project to clients, emphasize:
    that force structured, validated JSON output every time
 2. **Safe AI output handling** — SQL validation layer that prevents any 
    mutation queries from reaching the database
-3. **Dynamic visualization** — Claude decides the chart type based on query 
+3. **Dynamic visualization** — gemini decides the chart type based on query 
    intent; the app renders accordingly without any hardcoding
 4. **Production patterns** — Zod validation, error boundaries, read-only 
    database access, environment variable hygiene

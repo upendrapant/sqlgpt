@@ -1,2 +1,0 @@
--- Seed SQL for the HR schema
--- Tables: employees, departments, salaries, performance_reviews
