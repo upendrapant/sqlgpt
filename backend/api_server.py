@@ -45,10 +45,15 @@ def execute_query(query: str):
 
 if __name__ == "__main__":
     query = """
-    SELECT u.full_name, COUNT(o.order_id) AS total_orders
-    FROM users u
-    JOIN orders o ON u.user_id = o.user_id
-    GROUP BY u.full_name;
+SELECT 
+    table_name,
+    column_name,
+    data_type,
+    is_nullable,
+    column_default
+FROM information_schema.columns
+WHERE table_schema = 'public'
+ORDER BY table_name, ordinal_position;
     """
     output = execute_query(query)
     df = pd.DataFrame(output)
