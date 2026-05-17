@@ -1,4 +1,4 @@
-# QueryCraft
+##SQLgpt
 
 A natural-language to SQL query tool. Ask questions about your data in plain English and get instant results with visualizations.
 
