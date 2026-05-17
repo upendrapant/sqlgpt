@@ -5,4 +5,5 @@ DATABASE_PORT = os.getenv("port")
 DATABASE_NAME = os.getenv("dbname")
 DATABASE_USER = os.getenv("user")
 DATABASE_PWD = os.getenv("password")
+APIKEY = os.getenv("apikey")
 
